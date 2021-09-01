@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Raspberry Pi Status</title>
+</head>
+
+<body>
+    <div id="hero">
+        <!-- Header -->
+        <header>
+            <h1><span id="live-status" class="on"></span> Raspberry Pi Status</h1>
+            <p id="error">server conection lost</p>
+        </header>
+
+        <!-- Main -->
+        <main>
+            <!-- System Information -->
+            <section id="system-info-wrapper" class="section-wrap">
+                <div class="section-title">system info <span class="live on"></span> </div>
+
+                <!-- General Information -->
+                <div class="general-info-wrap">
+                    <div class="raspberrypi-icon">
+                        <img src="icons/raspberry-pi-icon.svg" alt="Raspberry Pi">
+                    </div>
+                    <table>
+                        <tr>
+                            <td>Hostname</td>
+                            <td id="hostname">-</td>
+                        </tr>
+                        <tr>
+                            <td>Model</td>
+                            <td id="model">-</td>
+                        </tr>
+                        <tr>
+                            <td>OS</td>
+                            <td id="os">-</td>
+                        </tr>
+                        <tr>
+                            <td>Kernal</td>
+                            <td id="kernel">-</td>
+                        </tr>
+                        <tr>
+                            <td>Processor</td>
+                            <td id="processor">-</td>
+                        </tr>
+                        <tr>
+                            <td>Architecture</td>
+                            <td id="architecture">-</td>
+                        </tr>
+                        <tr>
+                            <td>Hardware</td>
+                            <td id="hardware">-</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Server Time, uptime, temperature, core voltage -->
+                <div class="dynamic-data-wrap">
+                    <!-- server time -->
+                    <div class="data-wrap">
+                        <img src="icons/icons8-clock-80.png" alt="uptime">
+                        <div>
+                            <h2>Server time</h2>
+                            <p>
+                                <span class="hours" id="server-hour">00</span>
+                                :
+                                <span class="mins" id="server-mins">00</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- uptime -->
+                    <div class="data-wrap">
+                        <img src="icons/icons8-clock-80.png" alt="uptime">
+                        <div id="timer">
+                            <h2>uptime</h2>
+                            <p>
+                                <span class="days" id="uptime-days">00</span>
+                                :
+                                <span class="hours" id="uptime-hours">00</span>
+                                :
+                                <span class="mins" id="uptime-mins">00</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- cpu temperature -->
+                    <div class="data-wrap">
+                        <img src="icons/core-temperature-icon.png" alt="temperature">
+                        <div>
+                            <h2>Temperature</h2>
+                            <p><span id="temperature">0</span>&deg;C</p>
+                        </div>
+                    </div>
+
+                    <!-- Core voltage -->
+                    <div class="data-wrap">
+                        <img src="icons/core-voltage-icon.png" alt="core voltage">
+                        <div>
+                            <h2>Core Voltage</h2>
+                            <p><span id="voltage">0</span>V</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Memory status -->
+            <section id="section-memory-wrapper" class="section-wrap">
+                <div class="section-title">Memory <span class="live on"></span> </div>
+
+                <!-- RAM Memory Chart -->
+                <div class="memory-wrap">
+                    <h2>RAM - <span id="ram-size">-</span>M</h2>
+
+                    <ul class="memory-chart-container">
+                        <!-- RAM used size -->
+                        <li>
+                            <p>Used - <span id="ram-used">-</span>M</p>
+                            <div class="memory-value">
+                                <div class="memory-chart-bar__outer">
+                                    <div class="memory-chart-bar__inner" id="ram-used-bar"></div>
+                                </div>
+                                <p id="ram-used-percentage"></p>
+                            </div>
+                        </li>
+                        <!-- RAM free size -->
+                        <li>
+                            <p>Free - <span id="ram-free">-</span>M</p>
+                            <div class="memory-value">
+                                <div class="memory-chart-bar__outer">
+                                    <div class="memory-chart-bar__inner" id="ram-free-bar"></div>
+                                </div>
+                                <p id="ram-free-percentage"></p>
+                            </div>
+                        </li>
+                        <!-- RAM cache size -->
+                        <li>
+                            <p>Cache - <span id="ram-cache">-</span>M</p>
+                            <div class="memory-value">
+                                <div class="memory-chart-bar__outer">
+                                    <div class="memory-chart-bar__inner" id="ram-cache-bar"></div>
+                                </div>
+                                <p id="ram-cache-percentage"></p>
+                            </div>
+                        </li>
+                        <!-- RAM available size -->
+                        <li>
+                            <p>Available - <span id="ram-available">-</span>M</p>
+                            <div class="memory-value">
+                                <div class="memory-chart-bar__outer">
+                                    <div class="memory-chart-bar__inner" id="ram-available-bar"></div>
+                                </div>
+                                <p id="ram-available-percentage"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Swap Memory Chart -->
+                <div class="memory-wrap">
+                    <h2>SWAP - <span id="swap-size">-</span>M</h2>
+
+                    <ul class="memory-chart-container">
+                        <!-- Swap used size -->
+                        <li>
+                            <p>Used - <span id="swap-used">-</span>M</p>
+                            <div class="memory-value">
+                                <div class="memory-chart-bar__outer">
+                                    <div class="memory-chart-bar__inner" id="swap-used-bar"></div>
+                                </div>
+                                <p id="swap-used-percentage"></p>
+                            </div>
+                        </li>
+                        <!-- Swap free size -->
+                        <li>
+                            <p>Free - <span id="swap-free">-</span>M</p>
+                            <div class="memory-value">
+                                <div class="memory-chart-bar__outer">
+                                    <div class="memory-chart-bar__inner" id="swap-free-bar"></div>
+                                </div>
+                                <p id="swap-free-percentage"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Disk usage -->
+            <section id="section-disk-wrapper" class="section-wrap">
+                <div class="section-title">Disk Usage</div>
+
+                <!-- Disk Usage Chart -->
+                <div class="disk-usage-wrap">
+                    <ul class="disk-usage-chart-container" id="disk-lists"></ul>
+                </div>
+            </section>
+
+            <!-- Network status -->
+            <section id="section-network-wrapper" class="section-wrap">
+                <div class="section-title">Network</div>
+
+                <ul class="network-info">
+                    <!-- ethernet -->
+                    <li>
+                        <h2>eth0</h2>
+                        <table>
+                            <tr>
+                                <td>Mac Addr</td>
+                                <td id="eth0-mac">-</td>
+                            </tr>
+                            <tr>
+                                <td>IP Addr</td>
+                                <td id="eth0-ip">-</td>
+                            </tr>
+                        </table>
+                    </li>
+                    <!-- wifi -->
+                    <li>
+                        <h2>wlan0</h2>
+                        <table>
+                            <tr>
+                                <td>Mac Addr</td>
+                                <td id="wlan0-mac">-</td>
+                            </tr>
+                            <tr>
+                                <td>IP Addr</td>
+                                <td id="wlan0-ip">-</td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- top memory usage process -->
+            <section id="section-process-wrapper" class="section-wrap">
+                <div class="section-title">Process <span class="live on"></span> </div>
+
+                <pre id="ps"></pre>
+            </section>
+
+            <!-- ssh clients -->
+            <section id="section-ssh-wrapper" class="section-wrap">
+                <div class="section-title">SSH Client <span class="live on"></span> </div>
+
+                <table id="ssh-clients">
+                    <th>#</th>
+                    <th>IP Address</th>
+                    <th>Port</th>
+                </table>
+            </section>
+        </main>
+        <footer>x:o:x</footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,288 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #272727;
+  color: #fff;
+}
+
+li {
+  list-style: none;
+}
+
+table tr td {
+  padding: 10px;
+}
+
+table tr td:nth-child(2)::before {
+  content: ": ";
+}
+
+#hero {
+  position: relative;
+  max-width: 800px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #272727;
+}
+
+span.live {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: greenyellow;
+  margin-left: 10px;
+}
+
+header {
+  text-align: center;
+}
+
+#error {
+  font-style: italic;
+  color: tomato;
+  padding: 10px;
+}
+
+#error::before {
+  content: "* ";
+}
+
+#live-status {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff6347;
+}
+
+#live-status.on {
+  animation: green-blinker 0.5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes green-blinker {
+  from {
+    background: #589102;
+  }
+  to {
+    background: #b3ff41;
+  }
+}
+
+main {
+  border: 2px solid gray;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.section-wrap {
+  position: relative;
+  border: 3px solid #fff;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.section-wrap .section-title {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  padding: 5px 20px;
+  transform: translateY(-50%);
+  border: 3px solid #fff;
+  border-radius: 10px;
+  background-color: #272727;
+  text-transform: uppercase;
+}
+
+#system-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.general-info-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.general-info-wrap .raspberrypi-icon img {
+  width: 250px;
+}
+
+.dynamic-data-wrap {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+}
+
+.data-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: fit-content;
+  width: 250px;
+}
+
+.data-wrap img {
+  width: 60px;
+}
+
+.data-wrap div {
+  position: relative;
+  align-self: center;
+  color: #fff;
+}
+
+.data-wrap div h2 {
+  text-transform: capitalize;
+}
+
+.data-wrap div p {
+  font-size: 26px;
+}
+
+#timer p .days::after,
+#timer p .hours::after,
+#timer p .mins::after {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: -30%;
+  font-size: 35%;
+}
+
+#timer p span {
+  position: relative;
+}
+
+#timer p .days::after {
+  content: "Days";
+}
+
+#timer p .hours::after {
+  content: "Hrs";
+}
+
+#timer p .mins::after {
+  content: "Min";
+}
+
+#section-memory-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.memory-chart-container {
+  /* border: 1px solid greenyellow; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.memory-chart-container li {
+  max-width: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.memory-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.memory-chart-bar__outer {
+  flex: 1;
+  position: relative;
+  height: 20px;
+  border-radius: 3px;
+  background: #cccccc;
+  overflow: hidden;
+}
+
+.memory-chart-bar__inner {
+  position: absolute;
+  width: 1%;
+  height: 100%;
+  left: 0;
+  background: #ee8f8f;
+  transition: width 0.6s ease-out;
+}
+
+.disk-usage-chart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.disk-usage-chart-container li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disk-size-value {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.network-info {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.network-info li {
+  width: 300px;
+}
+
+#ps {
+  text-align: center;
+  font-size: 18px;
+  overflow-x: scroll;
+}
+
+#section-ssh-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#section-ssh-wrapper table th:nth-child(2),
+#section-ssh-wrapper table td:nth-child(2) {
+  width: 80%;
+  text-align: center;
+}
+
+#section-ssh-wrapper table td:nth-child(2)::before {
+  content: "";
+}

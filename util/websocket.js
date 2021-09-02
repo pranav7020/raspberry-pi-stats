@@ -12,10 +12,8 @@ wss.on('connection', function (ws) {
 
         ws.send(JSON.stringify(payload));
     }, 1000);
-    console.log('started client interval');
 
     ws.on('close', function () {
-        console.log('stopping client interval');
         clearInterval(id);
     });
 });

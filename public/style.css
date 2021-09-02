@@ -27,10 +27,6 @@ table tr td {
   padding: 10px;
 }
 
-table tr td:nth-child(2)::before {
-  content: ": ";
-}
-
 #hero {
   position: relative;
   max-width: 800px;
@@ -46,22 +42,19 @@ span.live {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: greenyellow;
+  background-color: #58D6BF;
   margin-left: 10px;
 }
 
 header {
   text-align: center;
+  margin: 20px 0;
 }
 
 #error {
   font-style: italic;
-  color: tomato;
-  padding: 10px;
-}
-
-#error::before {
-  content: "* ";
+  color: #FD5A43;
+  /* padding: 10px; */
 }
 
 #live-status {
@@ -69,7 +62,7 @@ header {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #ff6347;
+  background: #FD5A43;
 }
 
 #live-status.on {
@@ -86,7 +79,6 @@ header {
 }
 
 main {
-  border: 2px solid gray;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -96,7 +88,7 @@ main {
 
 .section-wrap {
   position: relative;
-  border: 3px solid #fff;
+  border: 3px solid #D7D5DE;
   padding: 20px;
   border-radius: 20px;
 }
@@ -107,7 +99,7 @@ main {
   left: 25px;
   padding: 5px 20px;
   transform: translateY(-50%);
-  border: 3px solid #fff;
+  border: 3px solid #D7D5DE;
   border-radius: 10px;
   background-color: #272727;
   text-transform: uppercase;
@@ -133,7 +125,6 @@ main {
   display: flex;
   gap: 25px;
   flex-wrap: wrap;
-  /* justify-content: space-around; */
 }
 
 .data-wrap {
@@ -195,7 +186,6 @@ main {
 }
 
 .memory-chart-container {
-  /* border: 1px solid greenyellow; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -222,7 +212,7 @@ main {
   position: relative;
   height: 20px;
   border-radius: 3px;
-  background: #cccccc;
+  background: #D7D5DE;
   overflow: hidden;
 }
 
@@ -231,7 +221,7 @@ main {
   width: 1%;
   height: 100%;
   left: 0;
-  background: #ee8f8f;
+  background: #2CADF6;
   transition: width 0.6s ease-out;
 }
 
@@ -281,8 +271,4 @@ main {
 #section-ssh-wrapper table td:nth-child(2) {
   width: 80%;
   text-align: center;
-}
-
-#section-ssh-wrapper table td:nth-child(2)::before {
-  content: "";
 }

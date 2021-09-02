@@ -58,14 +58,14 @@
     // ------------------ Memory Status ------------------
     function memoryStatusUI(memory) {
         // ram and swap memory total size
-        document.getElementById('ram-size').innerText = Math.floor(memory.ram.total / 1024) || '-';
-        document.getElementById('ram-used').innerText = Math.floor(memory.ram.used / 1024) || '-';
-        document.getElementById('ram-free').innerText = Math.floor(memory.ram.free / 1024) || '-';
-        document.getElementById('ram-cache').innerText = Math.floor(memory.ram.cache / 1024) || '-';
-        document.getElementById('ram-available').innerText = Math.floor(memory.ram.available / 1024) || '-';
-        document.getElementById('swap-size').innerText = Math.floor(memory.swap.total / 1024) || '-';
-        document.getElementById('swap-used').innerText = Math.floor(memory.swap.used / 1024) || '-';
-        document.getElementById('swap-free').innerText = Math.floor(memory.swap.free / 1024) || '-';
+        document.getElementById('ram-size').innerText = Math.floor(memory.ram.total / 1024) || 0;
+        document.getElementById('ram-used').innerText = Math.floor(memory.ram.used / 1024) || 0;
+        document.getElementById('ram-free').innerText = Math.floor(memory.ram.free / 1024) || 0;
+        document.getElementById('ram-cache').innerText = Math.floor(memory.ram.cache / 1024) || 0;
+        document.getElementById('ram-available').innerText = Math.floor(memory.ram.available / 1024) || 0;
+        document.getElementById('swap-size').innerText = Math.floor(memory.swap.total / 1024) || 0;
+        document.getElementById('swap-used').innerText = Math.floor(memory.swap.used / 1024) || 0;
+        document.getElementById('swap-free').innerText = Math.floor(memory.swap.free / 1024) || 0;
         // RAM memory percentage
         let ramUsedPercentage = ((memory.ram.used / memory.ram.total) * 100).toFixed(1) + '%';
         document.getElementById('ram-used-percentage').innerText = ramUsedPercentage || '';
@@ -111,7 +111,7 @@
                         <div class="memory-chart-bar__outer">
                             <div class="memory-chart-bar__inner" style="width: ${disk.use};"></div>
                         </div>
-                        <p>${Math.floor((disk.used / disk.size) * 100)}%</p>
+                        <p>${((disk.used / disk.size) * 100).toFixed(1)}%</p>
                     </div>
                     <p>${disk.used}M / ${disk.size}M</p>
                 </div>

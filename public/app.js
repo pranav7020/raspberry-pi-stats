@@ -1,10 +1,9 @@
 (async () => {
     const ws_hostname = window.location.hostname;
-    const ws_port = 8080;
-    const ws_URL = `ws://${ws_hostname}:${ws_port}`;
+    const ws_port = 8765;
 
     // create websocket connection
-    const socket = new WebSocket(ws_URL);
+    const socket = new WebSocket(`ws://${ws_hostname}:${ws_port}`);
 
     socket.onopen = (open) => {
         document.getElementById('live-status').classList.add('on');
@@ -21,8 +20,6 @@
     }
 
     socket.onmessage = (msg) => {
-        console.log(`WebSocket message : `)
-        console.log(JSON.parse(msg.data));
         let data = JSON.parse(msg.data);
         let metrics = data.metrics;
         let memory = data.memory;
@@ -138,6 +135,13 @@
             pEl.innerText = 'No ssh clients';
             document.getElementById('section-ssh-wrapper').appendChild(pEl);
         } else {
+            let tableEl = document.createElement('table');
+            tableEl.innerHTML = `
+                <th>#</th>
+                <th>IP Address</th>
+                <th>Port</th>
+            `;
+
             sshClients.forEach((ssh, index) => {
                 let rowEl = document.createElement('tr');
                 rowEl.innerHTML = `
@@ -146,8 +150,10 @@
                     <td>${ssh.port}</td>
                 `;
 
-                document.getElementById('ssh-clients').appendChild(rowEl);
-            })
+                tableEl.appendChild(rowEl);
+            });
+
+            document.getElementById('section-ssh-wrapper').appendChild(tableEl);
         }
     }
 
@@ -160,7 +166,7 @@
             data.systemInfo && systemInfoUI(data.systemInfo);
             data.network && networkStatusUI(data.network);
             data.diskUsage && data.diskUsage.length > 0 && diskUsageUI(data.diskUsage);
-            data.diskUsage && data.diskUsage.length > 0 ? sshClientUI(data.ssh) : sshClientUI([]);
+            data.ssh && data.ssh.length > 0 ? sshClientUI(data.ssh) : sshClientUI([]);
         })
         .catch((error) => {
             document.getElementById('error').innerText = 'Failed to getting server info!';

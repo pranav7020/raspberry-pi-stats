@@ -64,7 +64,7 @@ exports.systemInfo = async () => {
 
     let data = {
         hostname: hostname,
-        model: piModel.split('\u0000')[0],
+        model: piModel && piModel.split('\u0000')[0],
         os: os,
         kernel: kernel,
         processor: cpu,
@@ -132,6 +132,7 @@ exports.networks = async () => {
     const run_wIp = run(`ip -4 addr show dev wlan0 2>/dev/null | grep inet | awk '{print $2 "," $4}'`);
 
     let [eth0Mac, eth0Ip, wlan0Mac, wlan0IP] = await Promise.all([run_eMac, run_eIp, run_wMac, run_wIp]);
+    if (!eth0Mac && !eth0Ip && !wlan0Mac && !wlan0IP) return null;
 
     let data = {
         etho: {
@@ -148,7 +149,8 @@ exports.networks = async () => {
 }
 
 exports.process = async () => {
-    let processLists = await run(`ps -eo pid,cmd,%mem,%cpu --sort=-%mem | head`);
+    let processLists = await run(`ps -eo pid,cmd,%mem,%cpu --sort=-%mem | head 2>/dev/null`);
+    if (!processLists) return null;
 
     let processListsArray = processLists.split('\n');
     let process = '';
@@ -160,7 +162,8 @@ exports.process = async () => {
 }
 
 exports.sshClients = async () => {
-    let sshclientsCmd = await run(`ss | grep -i ssh`);
+    let sshclientsCmd = await run(`ss | grep -i ssh 2>/dev/null`);
+    if (!sshclientsCmd) return null;
 
     let sshClientsArray = sshclientsCmd.split('\n');
     let sshClients = [];

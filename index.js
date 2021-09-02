@@ -1,12 +1,15 @@
+const WebSocket = require("ws");
+const path = require('path');
 const express = require("express");
 const app = express();
-const path = require('path');
 
 const controller = require('./controller');
-require('./util/websocket');
 
-const port = 3030;
+// ports
+const server_port = 3030;
+const ws_port = 8765;
 
+// static web page
 app.use(express.static(path.join(__dirname, '/public/')));
 
 app.get('/info', async (req, res) => {
@@ -21,4 +24,24 @@ app.get('/info', async (req, res) => {
     res.json(data);
 })
 
-app.listen(port, () => console.log(`Server is running on port : ${port}`));
+// websocket
+const wss = new WebSocket.Server({ port: ws_port });
+
+wss.on('connection', function (ws) {
+    const id = setInterval(async function () {
+        let payload = {};
+        payload.metrics = await controller.metrics();
+        payload.process = await controller.process();
+        payload.memory = await controller.memory();
+
+        ws.send(JSON.stringify(payload));
+    }, 1000);
+
+    ws.on('close', function () {
+        clearInterval(id);
+    });
+});
+
+app.listen(server_port, () => {
+    console.log(`Server is running on port : ${server_port} \nWebsocket running on port : ${ws_port}`)
+});

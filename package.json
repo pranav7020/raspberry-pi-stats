@@ -1,5 +1,5 @@
 {
-  "name": "server-status",
+  "name": "raspberry-pi-status",
   "version": "1.0.0",
   "description": "Node server to get live raspberry pi system info, memory status, disk usage, ssh clients data with websocket.",
   "main": "index.js",

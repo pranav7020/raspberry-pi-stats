@@ -100,6 +100,7 @@
     // ------------------ Disk usage ------------------
     function diskUsageUI(diskUsage) {
         diskUsage.forEach(disk => {
+            let diskUsedPercent = ((disk.used / disk.size) * 100).toFixed(1);
             let liEl = document.createElement('li');
             liEl.innerHTML = `
                 <div>
@@ -109,9 +110,9 @@
                     <p>${disk.mounted} [${disk.type}]</p>
                     <div class="memory-value">
                         <div class="memory-chart-bar__outer">
-                            <div class="memory-chart-bar__inner" style="width: ${disk.use};"></div>
+                            <div class="memory-chart-bar__inner" style="width: ${disk.use}%;"></div>
                         </div>
-                        <p>${((disk.used / disk.size) * 100).toFixed(1)}%</p>
+                        <p>${diskUsedPercent}%</p>
                     </div>
                     <p>${disk.used}M / ${disk.size}M</p>
                 </div>

@@ -110,7 +110,7 @@
                     <p>${disk.mounted} [${disk.type}]</p>
                     <div class="memory-value">
                         <div class="memory-chart-bar__outer">
-                            <div class="memory-chart-bar__inner" style="width: ${disk.use}%;"></div>
+                            <div class="memory-chart-bar__inner" style="width: ${diskUsedPercent}%;"></div>
                         </div>
                         <p>${diskUsedPercent}%</p>
                     </div>
